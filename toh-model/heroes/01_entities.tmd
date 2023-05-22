@@ -1,0 +1,20 @@
+module: Heroes
+tags:
+  - back
+---
+class:
+  name: Hero
+  comment: Un héro
+  trigram: HER
+  properties:
+    - name: Id
+      domain: DO_ID
+      primaryKey: true
+      comment: Id technique du héro
+      label: Identifiant
+      required: true
+    - name: Name
+      domain: DO_LIBELLE
+      comment: Nom du héro
+      label: Nom
+      required: true
