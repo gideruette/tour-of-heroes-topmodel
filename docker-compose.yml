@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=toh
+      - POSTGRES_USER=toh
+      - POSTGRES_DB=toh
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d
+  modgen:
+    image: modgen
+    build:
+      context: ./toh-model
+      dockerfile: Dockerfile
+    working_dir: /toh/toh-model
+    volumes:
+      - ./:/toh
