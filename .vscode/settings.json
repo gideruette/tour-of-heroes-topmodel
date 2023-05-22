@@ -1,0 +1,5 @@
+{
+  "yaml.schemas": {
+    "toh-model/topmodel.config.schema.json": "toh-model/topmodel.config"
+  }
+}
