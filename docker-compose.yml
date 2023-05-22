@@ -17,3 +17,22 @@ services:
     working_dir: /toh/toh-model
     volumes:
       - ./:/toh
+  build-back:
+    image: maven:3-openjdk-17
+    volumes:
+      - "./toh-back:/toh"
+      - ~/.m2:/root/.m2
+    working_dir: /toh
+    entrypoint: ["mvn", install ]
+  back:
+    image: maven:3-openjdk-17
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/toh?currentSchema=toh
+      - SPRING_DATASOURCE_USERNAME=toh
+      - SPRING_DATASOURCE_PASSWORD=toh
+    volumes:
+      - "./toh-back/target/toh.jar:/toh/toh.jar"
+    working_dir: /toh
+    entrypoint: ["java", "-jar", "toh.jar" ]
