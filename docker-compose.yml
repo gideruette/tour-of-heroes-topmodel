@@ -36,3 +36,17 @@ services:
       - "./toh-back/target/toh.jar:/toh/toh.jar"
     working_dir: /toh
     entrypoint: ["java", "-jar", "toh.jar" ]
+  build-front:
+    image: node
+    volumes:
+      - "./toh-front:/toh-front"
+    working_dir: "/toh-front"
+    entrypoint: "npm install --force"
+  front:
+    image: node
+    volumes:
+      - "./toh-front:/toh-front"
+    ports:
+      - 4200:4200
+    working_dir: "/toh-front"
+    entrypoint: "npm run start"

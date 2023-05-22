@@ -1,0 +1,45 @@
+{
+  "name": "toh-topmodel",
+  "version": "0.0.0",
+  "description": "Example project from an angular.io guide.",
+  "license": "MIT",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "e2e": "ng e2e",
+    "dev:ssr": "ng run toh-topmodel:serve-ssr",
+    "serve:ssr": "node dist/server/main.js",
+    "run:ssr": "ng run toh-topmodel:server",
+    "prerender": "ng run toh-topmodel:prerender"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "16",
+    "@angular/common": "16",
+    "@angular/compiler": "16",
+    "@angular/core": "16",
+    "@angular/forms": "16",
+    "@angular/platform-browser": "16",
+    "@angular/platform-browser-dynamic": "16",
+    "@angular/platform-server": "16",
+    "@angular/router": "16",
+    "express": "^4.18.2",
+    "express-http-proxy": "^1.6.3",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.13.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "16",
+    "@angular/cli": "16",
+    "@angular/compiler-cli": "16",
+    "@types/express": "^4.17.13",
+    "@types/jasmine": "~4.3.0",
+    "@types/node": "^16.11.35",
+    "ts-node": "~10.9.0",
+    "typescript": "~4.9.3"
+  }
+}
