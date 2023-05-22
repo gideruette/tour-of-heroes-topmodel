@@ -15,3 +15,7 @@ generatedFiles:
   - ../toh-back/src/main/javagen/topmodel/toh/dtos/heroes/HeroUpdateDto.java
   - ../toh-back/src/main/javagen/topmodel/toh/entities/heroes/Hero.java
   - ../toh-back/src/main/javagen/topmodel/toh/entities/heroes/HeroesMappers.java
+  - ../toh-front/src/appgenerated/api/heroes/heroes.ts
+  - ../toh-front/src/appgenerated/model/heroes/hero-creation-dto.ts
+  - ../toh-front/src/appgenerated/model/heroes/hero-dto.ts
+  - ../toh-front/src/appgenerated/model/heroes/hero-update-dto.ts
