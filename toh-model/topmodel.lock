@@ -10,6 +10,8 @@ generatedFiles:
   - ../db/init/05_init_data.sql
   - ../toh-back/src/main/javagen/topmodel/toh/api/server/heroes/HeroesController.java
   - ../toh-back/src/main/javagen/topmodel/toh/daos/heroes/HeroDAO.java
+  - ../toh-back/src/main/javagen/topmodel/toh/dtos/heroes/HeroCreationDto.java
   - ../toh-back/src/main/javagen/topmodel/toh/dtos/heroes/HeroDto.java
+  - ../toh-back/src/main/javagen/topmodel/toh/dtos/heroes/HeroUpdateDto.java
   - ../toh-back/src/main/javagen/topmodel/toh/entities/heroes/Hero.java
   - ../toh-back/src/main/javagen/topmodel/toh/entities/heroes/HeroesMappers.java

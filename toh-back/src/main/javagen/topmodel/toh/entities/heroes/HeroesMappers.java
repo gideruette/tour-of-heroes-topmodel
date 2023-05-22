@@ -4,7 +4,9 @@
 
 package topmodel.toh.entities.heroes;
 
+import topmodel.toh.dtos.heroes.HeroCreationDto;
 import topmodel.toh.dtos.heroes.HeroDto;
+import topmodel.toh.dtos.heroes.HeroUpdateDto;
 
 public class HeroesMappers {
 
@@ -26,6 +28,46 @@ public class HeroesMappers {
 		} else {
 			throw new IllegalArgumentException("hero cannot be null");
 		}
+		return target;
+	}
+
+	/**
+	 * Mappe 'HeroCreationDto' vers 'Hero'.
+	 * @param source Instance de 'HeroCreationDto'.
+	 * @param target Instance pré-existante de 'Hero'. Une nouvelle instance sera créée si non spécifié.
+	 *
+	 * @return Une nouvelle instance de 'Hero' ou bien l'instance passée en paramètre dont les champs ont été surchargés.
+	 */
+	public static Hero toHero(HeroCreationDto source, Hero target) {
+		if (source == null) {
+			throw new IllegalArgumentException("source cannot be null");
+		}
+
+		if (target == null) {
+			target = new Hero();
+		}
+
+		target.setName(source.getName());
+		return target;
+	}
+
+	/**
+	 * Mappe 'HeroUpdateDto' vers 'Hero'.
+	 * @param source Instance de 'HeroUpdateDto'.
+	 * @param target Instance pré-existante de 'Hero'. Une nouvelle instance sera créée si non spécifié.
+	 *
+	 * @return Une nouvelle instance de 'Hero' ou bien l'instance passée en paramètre dont les champs ont été surchargés.
+	 */
+	public static Hero toHero(HeroUpdateDto source, Hero target) {
+		if (source == null) {
+			throw new IllegalArgumentException("source cannot be null");
+		}
+
+		if (target == null) {
+			target = new Hero();
+		}
+
+		target.setName(source.getName());
 		return target;
 	}
 }

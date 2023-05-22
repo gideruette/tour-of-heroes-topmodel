@@ -1,0 +1,82 @@
+////
+//// ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
+////
+
+package topmodel.toh.dtos.heroes;
+
+import java.io.Serializable;
+
+import jakarta.annotation.Generated;
+import jakarta.validation.constraints.NotNull;
+
+import topmodel.toh.entities.heroes.Hero;
+import topmodel.toh.entities.heroes.HeroesMappers;
+
+/**
+ * Objet de création pour un héro.
+ */
+@Generated("TopModel : https://github.com/klee-contrib/topmodel")
+public class HeroCreationDto implements Serializable {
+	/** Serial ID */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Nom du héro.
+	 * Alias of {@link topmodel.toh.entities.heroes.Hero#getName() Hero#getName()} 
+	 */
+	@NotNull
+	private String name;
+
+	/**
+	 * No arg constructor.
+	 */
+	public HeroCreationDto() {
+	}
+
+	/**
+	 * Copy constructor.
+	 * @param heroCreationDto to copy
+	 */
+	public HeroCreationDto(HeroCreationDto heroCreationDto) {
+		if(heroCreationDto == null) {
+			return;
+		}
+
+		this.name = heroCreationDto.getName();
+	}
+
+	/**
+	 * All arg constructor.
+	 * @param name Nom du héro
+	 */
+	public HeroCreationDto(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * Getter for name.
+	 *
+	 * @return value of {@link topmodel.toh.dtos.heroes.HeroCreationDto#name name}.
+	 */
+	public String getName() {
+		return this.name;
+	}
+
+	/**
+	 * Set the value of {@link topmodel.toh.dtos.heroes.HeroCreationDto#name name}.
+	 * @param name value to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * Mappe 'HeroCreationDto' vers 'Hero'.
+	 * @param target Instance pré-existante de 'Hero'. Une nouvelle instance sera créée si non spécifié.
+	 *
+	 * @return Une instance de 'Hero'.
+	 */
+	public Hero toHero(Hero target) {
+		return HeroesMappers.toHero(this, target);
+	}
+}
