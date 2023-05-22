@@ -11,3 +11,4 @@ generatedFiles:
   - ../toh-back/src/main/javagen/topmodel/toh/daos/heroes/HeroDAO.java
   - ../toh-back/src/main/javagen/topmodel/toh/dtos/heroes/HeroDto.java
   - ../toh-back/src/main/javagen/topmodel/toh/entities/heroes/Hero.java
+  - ../toh-back/src/main/javagen/topmodel/toh/entities/heroes/HeroesMappers.java

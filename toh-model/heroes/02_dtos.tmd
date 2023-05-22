@@ -11,3 +11,7 @@ class:
   properties:
     - alias:
         class: Hero
+  mappers:
+    from:
+      - params:
+          - class: Hero

@@ -9,6 +9,9 @@ import java.io.Serializable;
 import jakarta.annotation.Generated;
 import jakarta.validation.constraints.NotNull;
 
+import topmodel.toh.entities.heroes.Hero;
+import topmodel.toh.entities.heroes.HeroesMappers;
+
 /**
  * Objet de transfert pour la classe héro.
  */
@@ -57,6 +60,16 @@ public class HeroDto implements Serializable {
 	public HeroDto(Long id, String name) {
 		this.id = id;
 		this.name = name;
+	}
+
+	/**
+	 * Crée une nouvelle instance de 'HeroDto'.
+	 * @param hero Instance de 'Hero'.
+	 *
+	 * @return Une nouvelle instance de 'HeroDto'.
+	 */
+	public HeroDto(Hero hero) {
+		HeroesMappers.createHeroDto(hero, this);
 	}
 
 	/**
