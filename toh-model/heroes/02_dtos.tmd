@@ -15,3 +15,27 @@ class:
     from:
       - params:
           - class: Hero
+---
+class:
+  name: HeroUpdateDto
+  comment: Objet de modification pour un héro
+  properties:
+    - alias:
+        class: Hero
+        exclude:
+          - Id
+  mappers:
+    to:
+      - class: Hero
+---
+class:
+  name: HeroCreationDto
+  comment: Objet de création pour un héro
+  properties:
+    - alias:
+        class: Hero
+        exclude:
+          - Id
+  mappers:
+    to:
+      - class: Hero

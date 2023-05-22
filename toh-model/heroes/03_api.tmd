@@ -4,6 +4,7 @@ tags:
   - front
 uses:
   - heroes/02_dtos
+  - heroes/01_entities
 options:
   endpoints:
     fileName: Heroes
@@ -23,3 +24,58 @@ endpoint:
     name: HeroList
     comment: Liste des héros
     domain: DO_LIST
+---
+endpoint:
+  name: CreateHero
+  method: POST
+  route: ""
+  description: Création d'un héro
+  params:
+    - composition: HeroCreationDto
+      name: HeroUpdate
+      comment: Informations à modifier
+  returns:
+    composition: HeroDto
+    name: HeroList
+    comment: Liste des héros
+---
+endpoint:
+  name: GetHero
+  method: GET
+  route: "/{herId}"
+  description: Renvoie le détail d'un héro
+  params:
+    - alias:
+        class: Hero
+        property: Id
+  returns:
+    composition: HeroDto
+    name: HeroList
+    comment: Liste des héros
+---
+endpoint:
+  name: UpdateHero
+  method: PATCH
+  route: "/{herId}"
+  description: Modification d'un héro
+  params:
+    - alias:
+        class: Hero
+        property: Id
+    - composition: HeroUpdateDto
+      name: HeroUpdate
+      comment: Informations à modifier
+  returns:
+    composition: HeroDto
+    name: HeroList
+    comment: Liste des héros
+---
+endpoint:
+  name: DeleteHero
+  method: DELETE
+  route: "/{herId}"
+  description: Suppression d'un héro
+  params:
+    - alias:
+        class: Hero
+        property: Id
