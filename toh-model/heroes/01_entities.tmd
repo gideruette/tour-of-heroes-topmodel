@@ -18,3 +18,6 @@ class:
       comment: Nom du héro
       label: Nom
       required: true
+  values:
+    WWO: {Id: 1, Name: Wonder Woman}
+    SPP: {Id: 2, Name: Super Player}
