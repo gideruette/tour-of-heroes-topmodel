@@ -2,12 +2,13 @@
 # ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
 #
 
-version: 1.30.2
+version: 1.31.0
 generatedFiles:
   - ../db/init/02_create_tables.sql
   - ../db/init/03_create_fk.sql
   - ../db/init/04_create_uk.sql
   - ../db/init/05_init_data.sql
+  - ../toh-back/src/main/javagen/topmodel/toh/api/server/heroes/HeroesController.java
   - ../toh-back/src/main/javagen/topmodel/toh/daos/heroes/HeroDAO.java
   - ../toh-back/src/main/javagen/topmodel/toh/dtos/heroes/HeroDto.java
   - ../toh-back/src/main/javagen/topmodel/toh/entities/heroes/Hero.java

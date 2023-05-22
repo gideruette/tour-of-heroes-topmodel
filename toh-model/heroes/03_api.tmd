@@ -1,0 +1,25 @@
+module: Heroes
+tags:
+  - back
+  - front
+uses:
+  - heroes/02_dtos
+options:
+  endpoints:
+    fileName: Heroes
+    prefix: heroes
+---
+endpoint:
+  name: SearchHeroes
+  method: GET
+  route: ""
+  description: Renvoie la liste des héros filtrés avec le terme le cas échéant
+  params:
+    - name: Term
+      comment: Terme de la recherche
+      domain: DO_LIBELLE
+  returns:
+    composition: HeroDto
+    name: HeroList
+    comment: Liste des héros
+    domain: DO_LIST
