@@ -1,0 +1,13 @@
+module: Heroes
+tags:
+  - back
+  - front
+uses:
+  - heroes/01_entities
+---
+class:
+  name: HeroDto
+  comment: Objet de transfert pour la classe héro
+  properties:
+    - alias:
+        class: Hero

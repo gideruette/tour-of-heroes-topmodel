@@ -9,4 +9,5 @@ generatedFiles:
   - ../db/init/04_create_uk.sql
   - ../db/init/05_init_data.sql
   - ../toh-back/src/main/javagen/topmodel/toh/daos/heroes/HeroDAO.java
+  - ../toh-back/src/main/javagen/topmodel/toh/dtos/heroes/HeroDto.java
   - ../toh-back/src/main/javagen/topmodel/toh/entities/heroes/Hero.java
