@@ -26,6 +26,10 @@ spring:
         batch_versioned_data: "true"
         enable_lazy_load_no_trans: "true"
         order_inserts: "true"
+        cache:
+          use_second_level_cache: true
+          region:
+            factory_class: infinispan
         temp:
           use_jdbc_metadata_defaults: "false"
         show_sql: "false"

@@ -16,3 +16,12 @@ create table HERO (
 	constraint PK_HERO primary key (HER_ID)
 );
 
+/**
+  * Création de la table HERO_TYPE
+ **/
+create table HERO_TYPE (
+	HTY_CODE varchar(3) not null,
+	HTY_LIBELLE varchar(100) not null,
+	constraint PK_HERO_TYPE primary key (HTY_CODE)
+);
+

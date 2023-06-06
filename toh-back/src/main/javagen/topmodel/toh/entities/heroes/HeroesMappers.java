@@ -4,10 +4,13 @@
 
 package topmodel.toh.entities.heroes;
 
+import jakarta.annotation.Generated;
+
 import topmodel.toh.dtos.heroes.HeroCreationDto;
 import topmodel.toh.dtos.heroes.HeroDto;
 import topmodel.toh.dtos.heroes.HeroUpdateDto;
 
+@Generated("TopModel : https://github.com/klee-contrib/topmodel")
 public class HeroesMappers {
 
 	/**

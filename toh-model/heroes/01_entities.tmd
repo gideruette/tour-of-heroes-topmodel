@@ -3,6 +3,27 @@ tags:
   - back
 ---
 class:
+  name: HeroType
+  comment: Un héro
+  trigram: HTY
+  reference: true
+  properties:
+    - name: Code
+      domain: DO_CODE
+      primaryKey: true
+      comment: Code du type de héro
+      label: Code
+      required: true
+    - name: Libelle
+      domain: DO_LIBELLE
+      comment: Libelle du type
+      label: Libellé
+      required: true
+  values:
+    WWO: {Code: HUM, Libelle: Humain}
+    SPP: {Code: EXT, Libelle: Extra terrestre}
+---
+class:
   name: Hero
   comment: Un héro
   trigram: HER
