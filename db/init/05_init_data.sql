@@ -3,7 +3,7 @@
 ----
 
 -- =========================================================================================== 
---   Application Name	:	tour-of-heroes 
+--   Application Name	:	tourOfHeroes 
 --   Script Name		:	05_init_data.sql
 --   Description		:	Script d'insertion des données de références
 -- ===========================================================================================

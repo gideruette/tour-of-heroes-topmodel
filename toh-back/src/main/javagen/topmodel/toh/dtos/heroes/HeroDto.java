@@ -40,29 +40,6 @@ public class HeroDto implements Serializable {
 	}
 
 	/**
-	 * Copy constructor.
-	 * @param heroDto to copy
-	 */
-	public HeroDto(HeroDto heroDto) {
-		if(heroDto == null) {
-			return;
-		}
-
-		this.id = heroDto.getId();
-		this.name = heroDto.getName();
-	}
-
-	/**
-	 * All arg constructor.
-	 * @param id Id technique du héro
-	 * @param name Nom du héro
-	 */
-	public HeroDto(Long id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-
-	/**
 	 * Crée une nouvelle instance de 'HeroDto'.
 	 * @param hero Instance de 'Hero'.
 	 *

@@ -4,11 +4,13 @@
 
 package topmodel.toh.daos.heroes;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import topmodel.toh.entities.heroes.HeroType;
 
+import tourofheroes.enums.heroes.HeroTypeCode;
 
-public interface HeroTypeDAO extends JpaRepository<HeroType, HeroType.Values> {
+
+public interface HeroTypeDAO extends CrudRepository<HeroType, HeroTypeCode> {
 
 }

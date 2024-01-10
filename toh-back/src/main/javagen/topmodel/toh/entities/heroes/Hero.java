@@ -23,44 +23,21 @@ public class Hero {
 	/**
 	 * Id technique du héro.
 	 */
-	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "HER_ID", nullable = false)
+	@Id
+	@Column(name = "HER_ID", nullable = false, columnDefinition = "int8")
 	private Long id;
 
 	/**
 	 * Nom du héro.
 	 */
-	@Column(name = "HER_NAME", nullable = false, length = 100)
+	@Column(name = "HER_NAME", nullable = false, length = 100, columnDefinition = "varchar")
 	private String name;
 
 	/**
 	 * No arg constructor.
 	 */
 	public Hero() {
-	}
-
-	/**
-	 * Copy constructor.
-	 * @param hero to copy
-	 */
-	public Hero(Hero hero) {
-		if(hero == null) {
-			return;
-		}
-
-		this.id = hero.getId();
-		this.name = hero.getName();
-	}
-
-	/**
-	 * All arg constructor.
-	 * @param id Id technique du héro
-	 * @param name Nom du héro
-	 */
-	public Hero(Long id, String name) {
-		this.id = id;
-		this.name = name;
 	}
 
 	/**

@@ -2,13 +2,13 @@
 # ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
 #
 
-version: 1.31.1
+version: 1.42.6
 generatedFiles:
   - ../db/init/02_create_tables.sql
   - ../db/init/03_create_fk.sql
   - ../db/init/04_create_uk.sql
   - ../db/init/05_init_data.sql
-  - ../toh-back/src/main/javagen/topmodel/toh/api/server/heroes/HeroesController.java
+  - ../toh-back/src/main/javagen/topmodel/toh/api/server/heroes/HeroController.java
   - ../toh-back/src/main/javagen/topmodel/toh/daos/heroes/HeroDAO.java
   - ../toh-back/src/main/javagen/topmodel/toh/daos/heroes/HeroTypeDAO.java
   - ../toh-back/src/main/javagen/topmodel/toh/dtos/heroes/HeroCreationDto.java
@@ -17,7 +17,8 @@ generatedFiles:
   - ../toh-back/src/main/javagen/topmodel/toh/entities/heroes/Hero.java
   - ../toh-back/src/main/javagen/topmodel/toh/entities/heroes/HeroesMappers.java
   - ../toh-back/src/main/javagen/topmodel/toh/entities/heroes/HeroType.java
-  - ../toh-front/src/appgenerated/api/heroes/heroes.ts
+  - ../toh-back/src/main/javagen/tourofheroes/enums/heroes/HeroTypeCode.java
+  - ../toh-front/src/appgenerated/api/heroes/hero.ts
   - ../toh-front/src/appgenerated/model/heroes/hero-creation-dto.ts
   - ../toh-front/src/appgenerated/model/heroes/hero-dto.ts
   - ../toh-front/src/appgenerated/model/heroes/hero-update-dto.ts

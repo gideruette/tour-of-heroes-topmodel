@@ -3,7 +3,7 @@
 ----
 
 -- =========================================================================================== 
---   Application Name	:	tour-of-heroes 
+--   Application Name	:	tourOfHeroes 
 --   Script Name		:	02_create_tables.sql
 --   Description		:	Script de création des tables.
 -- =========================================================================================== 

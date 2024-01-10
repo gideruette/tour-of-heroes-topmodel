@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { HeroService } from '@/appgenerated/api/heroes/hero';
 import { HeroDto } from '@/appgenerated/model/heroes/hero-dto';
-import { HeroesService } from '@/appgenerated/api/heroes/heroes';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,21 +10,14 @@ import { HeroesService } from '@/appgenerated/api/heroes/heroes';
 export class DashboardComponent implements OnInit {
   heroes: HeroDto[] = [];
 
-  constructor(private heroesService: HeroesService) { }
+  constructor(private heroService: HeroService) { }
 
   ngOnInit(): void {
     this.getHeroes();
   }
 
   getHeroes(): void {
-    this.heroesService.searchHeroes()
+    this.heroService.getHeroes()
       .subscribe(heroes => this.heroes = heroes.slice(1, 5));
   }
 }
-
-
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at https://angular.io/license
-*/

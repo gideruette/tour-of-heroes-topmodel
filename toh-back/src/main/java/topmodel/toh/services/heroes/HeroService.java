@@ -11,18 +11,18 @@ import topmodel.toh.dtos.heroes.HeroDto;
 import topmodel.toh.dtos.heroes.HeroUpdateDto;
 
 @Service
-public class HeroesService {
+public class HeroService {
 
 	private final HeroDAO heroDAO;
 
-	public HeroesService(HeroDAO heroDAO) {
+	public HeroService(HeroDAO heroDAO) {
 		this.heroDAO = heroDAO;
 	}
 
 	/**
 	 * @return La liste de tous les héros
 	 */
-	public List<HeroDto> searchHeroes(String term) {
+	public List<HeroDto> getHeroes(String term) {
 		if (term == null) {
 			term = "";
 		}
@@ -59,7 +59,7 @@ public class HeroesService {
 	 * @param heroCreate le héro à créer
 	 * @return le héro créé
 	 */
-	public HeroDto createHero(@Valid HeroCreationDto heroCreate) {
+	public HeroDto addHero(@Valid HeroCreationDto heroCreate) {
 		var savedHero = heroDAO.save(heroCreate.toHero(null));
 		return new HeroDto(savedHero);
 	}

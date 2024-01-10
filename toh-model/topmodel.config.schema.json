@@ -40,7 +40,13 @@
     },
     "useLegacyRoleNames": {
       "type": "boolean",
-      "description": "Transforme les noms de rôles d'associations en upper case (au lieu de constant case) pour déterminer le nom SQL des propriétés"
+      "description": "Transforme les noms de rôles d'associations en upper case (au lieu de constant case) pour déterminer le nom SQL des propriétés",
+      "default": "false"
+    },
+    "useLegacyAssociationCompositionMappers": {
+      "type": "boolean",
+      "description": "Permet de mapper les compositions OneToMany et ManyToMany à des compositions avec un kind non null. Sans garantie de résultat...",
+      "default": false
     },
     "i18n": {
       "type": "object",
@@ -157,6 +163,10 @@
             "type": "string",
             "description": "Racine du répertoire de génération."
           },
+          "ignoreDefaultValues": {
+            "type": "boolean",
+            "description": "Désactive la génération des valeurs par défaut des propriétés dans les classes et endpoints générés avec cette configuration."
+          },
           "persistentModelPath": {
             "type": "string",
             "description": "Localisation du modèle persisté, relative au répertoire de génération. Par défaut : {app}.{module}.Models."
@@ -194,6 +204,10 @@
               }
             ]
           },
+          "dataFlowsPath": {
+            "type": "string",
+            "description": "Localisation des flux de données générés."
+          },
           "useEFMigrations": {
             "type": "boolean",
             "description": "Utilise les migrations EF pour créer/mettre à jour la base de données."
@@ -230,10 +244,6 @@
             "type": "string",
             "description": "Le nom du schéma de base de données à cibler (si non renseigné, EF utilise 'dbo')."
           },
-          "useLatestCSharp": {
-            "type": "boolean",
-            "description": "Utilise les features C# 10 dans la génération."
-          },
           "kinetix": {
             "type": "boolean",
             "description": "Si on génère avec Kinetix."
@@ -241,6 +251,24 @@
           "domainNamespace": {
             "type": "string",
             "description": "Namespace de l'enum de domaine pour Kinetix. Par défaut : '{app}.Common'."
+          },
+          "nonNullableTypes": {
+            "oneOf": [
+              {
+                "type": "boolean",
+                "description": "Types C# que le générateur doit considérer comme étant non nullables (nécessitant donc l'ajout d'un '?' pour l'être).\r\nLa plupart des types standard comme 'int', 'bool' ou 'DateTime' sont déjà connus du générateur.\r\nCe paramètre permet soit de spécifier une liste de types non-nullables supplémentaires, soit 'true' pour considérer que tous les types sont non-nullables (pour correspondre à <nullable>enable</nullable>).",
+                "enum": [
+                  true
+                ]
+              },
+              {
+                "type": "array",
+                "description": "Types C# que le générateur doit considérer comme étant non nullables (nécessitant donc l'ajout d'un '?' pour l'être).\r\nLa plupart des types standard comme 'int', 'bool' ou 'DateTime' sont déjà connus du générateur.\r\nCe paramètre permet soit de spécifier une liste de types non-nullables supplémentaires, soit 'true' pour considérer que tous les types sont non-nullables (pour correspondre à <nullable>enable</nullable>).",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
           },
           "noColumnOnAlias": {
             "type": "boolean",
@@ -266,6 +294,14 @@
               "type": "string"
             }
           },
+          "mapperLocationPriority": {
+            "type": "string",
+            "description": "Détermine le type de classe prioritaire pour déterminer la localisation des mappers générés (`persistent` ou `non-persistent`). Par défaut : 'persistent'",
+            "enum": [
+              "persistent",
+              "non-persistent"
+            ]
+          },
           "enumsForStaticReferences": {
             "type": "boolean",
             "description": "Utilise des enums au lieu de strings pour les PKs de listes de référence statiques."
@@ -273,6 +309,22 @@
           "useEFComments": {
             "type": "boolean",
             "description": "Annote les tables et les colonnes générées par EF avec les commentaires du modèle (nécessite `UseEFMigrations`)."
+          },
+          "useRecords": {
+            "type": [
+              "string",
+              "boolean"
+            ],
+            "description": "Utilise des records (mutables) au lieu de classes pour la génération de classes.",
+            "enum": [
+              true,
+              false,
+              "dtos-only"
+            ]
+          },
+          "usePrimaryConstructors": {
+            "type": "boolean",
+            "description": "Utilise les constructeurs principaux pour la génération des classes avec dépendances (clients d'API, accesseurs de références)."
           }
         }
       }
@@ -341,6 +393,10 @@
             "type": "string",
             "description": "Racine du répertoire de génération."
           },
+          "ignoreDefaultValues": {
+            "type": "boolean",
+            "description": "Désactive la génération des valeurs par défaut des propriétés dans les classes et endpoints générés avec cette configuration."
+          },
           "modelRootPath": {
             "type": "string",
             "description": "Localisation du modèle, relative au répertoire de génération. Si non renseigné, aucun modèle ne sera généré."
@@ -360,22 +416,36 @@
           },
           "fetchPath": {
             "type": "string",
-            "description": "Chemin (ou alias commençant par '@') vers un 'fetch' personnalisé, relatif au répertoire de génération."
+            "description": "Chemin ou import vers un 'fetch' personnalisé, relatif au répertoire de génération s'il commence par un '.'."
           },
           "domainPath": {
             "type": "string",
-            "description": "Chemin (ou alias commençant par '@') vers le fichier 'domain', relatif au répertoire de génération.",
+            "description": "Chemin ou import vers le fichier 'domain', relatif au répertoire de génération s'il commence par un '.'.",
             "default": "../domains"
           },
-          "targetFramework": {
+          "apiMode": {
             "type": "string",
             "description": "Framework cible pour la génération.",
             "default": "focus",
             "enum": [
-              "focus",
               "angular",
-              "vanilla"
+              "vanilla",
+              "nuxt"
             ]
+          },
+          "entityMode": {
+            "type": "string",
+            "description": "Framework cible pour la génération.",
+            "default": "typed",
+            "enum": [
+              "untyped",
+              "typed"
+            ]
+          },
+          "entityTypesPath": {
+            "type": "string",
+            "description": "Chemin d'import des type d'entités",
+            "default": "@focus4/stores"
           },
           "resourceMode": {
             "type": "string",
@@ -462,6 +532,7 @@
                 "JpaInterfaceGen",
                 "JpaMapperGenerator",
                 "JpaDaoGen",
+                "JpaEnumGenerator",
                 "JpaResourceGen",
                 "SpringApiServerGen",
                 "SpringApiClientGen"
@@ -471,6 +542,10 @@
           "outputDirectory": {
             "type": "string",
             "description": "Racine du répertoire de génération."
+          },
+          "ignoreDefaultValues": {
+            "type": "boolean",
+            "description": "Désactive la génération des valeurs par défaut des propriétés dans les classes et endpoints générés avec cette configuration."
           },
           "entitiesPath": {
             "type": "string",
@@ -483,6 +558,11 @@
           "dtosPath": {
             "type": "string",
             "description": "Localisation des classes non persistées du modèle, relative au répertoire de génération. Par défaut, 'javagen:{app}/dtos/{module}'."
+          },
+          "enumsPath": {
+            "type": "string",
+            "description": "Localisation des enums du modèle, relative au répertoire de génération.",
+            "default": "javagen:{app}/enums/{module}"
           },
           "apiPath": {
             "type": "string",
@@ -505,13 +585,71 @@
               }
             ]
           },
+          "clientApiGeneration": {
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "Mode de génération de l'API Client ('Client' ou 'Server')",
+                "default": "RestClient",
+                "enum": [
+                  "RestTemplate",
+                  "RestClient"
+                ]
+              },
+              {
+                "type": "string",
+                "description": "Mode de génération de l'API ('RestTemplate' ou 'RestClient')",
+                "default": "RestClient",
+                "pattern": "^\\{[^\\}]+\\}$"
+              }
+            ]
+          },
           "resourcesPath": {
             "type": "string",
             "description": "Localisation des ressources, relative au répertoire de génération."
           },
+          "useJdbc": {
+            "type": "boolean",
+            "description": "Générer les entités en mode JDBC",
+            "default": "false"
+          },
+          "mappersInClass": {
+            "type": "boolean",
+            "description": "Indique s'il faut ajouter les mappers en tant méthode ou constructeur dans les classes qui les déclarent"
+          },
+          "dataFlowsPath": {
+            "type": "string",
+            "description": "Localisation des flux de données générés."
+          },
+          "dataFlowsBulkSize": {
+            "type": "number",
+            "description": "Taille des chunks à extraire et insérer"
+          },
+          "dataFlowsListeners": {
+            "type": "array",
+            "description": "Listeners à ajouter à tous les dataflows",
+            "items": {
+              "type": "string",
+              "description": "Listener à ajouter à tous les dataflows"
+            }
+          },
+          "dbSchema": {
+            "type": "string",
+            "description": "Nom du schéma sur lequel les entités sont sauvegardées"
+          },
           "enumShortcutMode": {
             "type": "boolean",
             "description": "Option pour générer des getters et setters vers l'enum des références plutôt que sur la table",
+            "default": "false"
+          },
+          "associationAdders": {
+            "type": "boolean",
+            "description": "Option pour générer des méthodes d'ajouts pour les associations oneToMany et manyToMany. Ces méthodes permettent de synchroniser les objets ajoutés",
+            "default": "false"
+          },
+          "associationRemovers": {
+            "type": "boolean",
+            "description": "Option pour générer des méthodes de suppression pour les associations oneToMany et manyToMany. Ces méthodes permettent de synchroniser les objets supprimés",
             "default": "false"
           },
           "fieldsEnum": {
@@ -533,8 +671,8 @@
             "type": "string",
             "description": "Mode de génération de la persistence ('Javax' ou 'Jakarta')",
             "enum": [
-              "Javax",
-              "Jakarta"
+              "javax",
+              "jakarta"
             ]
           },
           "identity": {
@@ -611,6 +749,10 @@
             "type": "string",
             "description": "Racine du répertoire de génération."
           },
+          "ignoreDefaultValues": {
+            "type": "boolean",
+            "description": "Désactive la génération des valeurs par défaut des propriétés dans les classes et endpoints générés avec cette configuration."
+          },
           "targetDBMS": {
             "type": "string",
             "description": "SGBD cible ('postgre' ou 'sqlserver').",
@@ -639,6 +781,10 @@
               "typeFile": {
                 "type": "string",
                 "description": "Emplacement du fichier de création des types."
+              },
+              "commentFile": {
+                "type": "string",
+                "description": "Emplacement du fichier de création des commentaires."
               },
               "initListFile": {
                 "type": "string",
@@ -740,6 +886,10 @@
           "outputDirectory": {
             "type": "string",
             "description": "Racine du répertoire de génération."
+          },
+          "ignoreDefaultValues": {
+            "type": "boolean",
+            "description": "Désactive la génération des valeurs par défaut des propriétés dans les classes et endpoints générés avec cette configuration."
           },
           "rootPath": {
             "type": "string",

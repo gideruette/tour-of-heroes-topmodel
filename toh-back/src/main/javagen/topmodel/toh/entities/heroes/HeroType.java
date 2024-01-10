@@ -16,6 +16,8 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import tourofheroes.enums.heroes.HeroTypeCode;
+
 /**
  * Un héro.
  */
@@ -30,14 +32,14 @@ public class HeroType {
 	 * Code du type de héro.
 	 */
 	@Id
-	@Column(name = "HTY_CODE", nullable = false, length = 3)
+	@Column(name = "HTY_CODE", nullable = false, length = 3, columnDefinition = "varchar")
 	@Enumerated(EnumType.STRING)
-	private HeroType.Values code;
+	private HeroTypeCode code;
 
 	/**
 	 * Libelle du type.
 	 */
-	@Column(name = "HTY_LIBELLE", nullable = false, length = 100)
+	@Column(name = "HTY_LIBELLE", nullable = false, length = 100, columnDefinition = "varchar")
 	private String libelle;
 
 	/**
@@ -46,27 +48,23 @@ public class HeroType {
 	public HeroType() {
 	}
 
-	/**
-	 * Copy constructor.
-	 * @param heroType to copy
-	 */
-	public HeroType(HeroType heroType) {
-		if(heroType == null) {
-			return;
-		}
-
-		this.code = heroType.getCode();
-		this.libelle = heroType.getLibelle();
-	}
+	public static final HeroType EXT = new HeroType(HeroTypeCode.EXT);
+	public static final HeroType HUM = new HeroType(HeroTypeCode.HUM);
 
 	/**
-	 * All arg constructor.
-	 * @param code Code du type de héro
-	 * @param libelle Libelle du type
+	 * Enum constructor.
+	 * @param code Code dont on veut obtenir l'instance.
 	 */
-	public HeroType(HeroType.Values code, String libelle) {
+	public HeroType(HeroTypeCode code) {
 		this.code = code;
-		this.libelle = libelle;
+		switch(code) {
+		case EXT :
+			this.libelle = "heroes.heroType.values.SPP";
+			break;
+		case HUM :
+			this.libelle = "heroes.heroType.values.WWO";
+			break;
+		}
 	}
 
 	/**
@@ -74,7 +72,7 @@ public class HeroType {
 	 *
 	 * @return value of {@link topmodel.toh.entities.heroes.HeroType#code code}.
 	 */
-	public HeroType.Values getCode() {
+	public HeroTypeCode getCode() {
 		return this.code;
 	}
 
@@ -91,7 +89,7 @@ public class HeroType {
 	 * Set the value of {@link topmodel.toh.entities.heroes.HeroType#code code}.
 	 * @param code value to set
 	 */
-	public void setCode(HeroType.Values code) {
+	public void setCode(HeroTypeCode code) {
 		this.code = code;
 	}
 
@@ -101,38 +99,5 @@ public class HeroType {
 	 */
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
-	}
-
-	public enum Values {
-		EXT("heroes.heroType.values.SPP"), //
-		HUM("heroes.heroType.values.WWO"); 
-
-		/**
-		 * Libelle du type.
-		 */
-		private final String libelle;
-
-		/**
-		 * All arg constructor.
-		 */
-		private Values(String libelle) {
-			this.libelle = libelle;
-		}
-
-		/**
-		 * Méthode permettant de récupérer l'entité correspondant au code.
-		 *
-		 * @return instance de {@link topmodel.toh.entities.heroes.HeroType} correspondant au code courant.
-		 */
-		public HeroType getEntity() {
-			return new HeroType(this, libelle);
-		}
-
-		/**
-		 * Libelle du type.
-		 */
-		public String getLibelle(){
-			return this.libelle;
-		}
 	}
 }

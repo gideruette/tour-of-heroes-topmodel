@@ -3,15 +3,15 @@ tags:
   - back
   - front
 uses:
-  - heroes/02_dtos
   - heroes/01_entities
+  - heroes/02_dtos
 options:
   endpoints:
-    fileName: Heroes
-    prefix: heroes
+    fileName: Hero
+    prefix: hero
 ---
 endpoint:
-  name: SearchHeroes
+  name: GetHeroes
   method: GET
   route: ""
   description: Renvoie la liste des héros filtrés avec le terme le cas échéant
@@ -26,7 +26,7 @@ endpoint:
     domain: DO_LIST
 ---
 endpoint:
-  name: CreateHero
+  name: AddHero
   method: POST
   route: ""
   description: Création d'un héro

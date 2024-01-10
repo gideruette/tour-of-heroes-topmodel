@@ -13,6 +13,10 @@ import topmodel.toh.dtos.heroes.HeroUpdateDto;
 @Generated("TopModel : https://github.com/klee-contrib/topmodel")
 public class HeroesMappers {
 
+	private HeroesMappers() {
+		// private constructor to hide implicite public one
+	}
+
 	/**
 	 * Map les champs des classes passées en paramètre dans l'objet target'.
 	 * @param target Instance de 'HeroDto' (ou null pour créer une nouvelle instance).
@@ -25,12 +29,12 @@ public class HeroesMappers {
 			target = new HeroDto();
 		}
 
-		if (hero != null) {
-			target.setId(hero.getId());
-			target.setName(hero.getName());
-		} else {
+		if (hero == null) {
 			throw new IllegalArgumentException("hero cannot be null");
 		}
+
+		target.setId(hero.getId());
+		target.setName(hero.getName());
 		return target;
 	}
 

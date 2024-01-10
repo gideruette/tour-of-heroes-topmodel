@@ -34,26 +34,6 @@ public class HeroCreationDto implements Serializable {
 	}
 
 	/**
-	 * Copy constructor.
-	 * @param heroCreationDto to copy
-	 */
-	public HeroCreationDto(HeroCreationDto heroCreationDto) {
-		if(heroCreationDto == null) {
-			return;
-		}
-
-		this.name = heroCreationDto.getName();
-	}
-
-	/**
-	 * All arg constructor.
-	 * @param name Nom du héro
-	 */
-	public HeroCreationDto(String name) {
-		this.name = name;
-	}
-
-	/**
 	 * Getter for name.
 	 *
 	 * @return value of {@link topmodel.toh.dtos.heroes.HeroCreationDto#name name}.

@@ -12,46 +12,42 @@ import {HeroUpdateDto} from "../../model/heroes/hero-update-dto";
 @Injectable({
     providedIn: 'root'
 })
-export class HeroesService {
+export class HeroService {
 
     constructor(private http: HttpClient) {}
 
     /**
-     * Création d'un héro
+     * @description Création d'un héro
      * @param heroUpdate Informations à modifier
-     * @param options Options pour 'fetch'.
      * @returns Liste des héros
      */
-    createHero(heroUpdate: HeroCreationDto): Observable<HeroDto> {
-        return this.http.post<HeroDto>(`/heroes`, heroUpdate);
+    addHero(heroUpdate: HeroCreationDto): Observable<HeroDto> {
+        return this.http.post<HeroDto>(`/hero`, heroUpdate);
     }
 
     /**
-     * Suppression d'un héro
+     * @description Suppression d'un héro
      * @param herId Id technique du héro
-     * @param options Options pour 'fetch'.
      */
     deleteHero(herId: number): Observable<void> {
-        return this.http.delete<void>(`/heroes/${herId}`);
+        return this.http.delete<void>(`/hero/${herId}`);
     }
 
     /**
-     * Renvoie le détail d'un héro
+     * @description Renvoie le détail d'un héro
      * @param herId Id technique du héro
-     * @param options Options pour 'fetch'.
      * @returns Liste des héros
      */
     getHero(herId: number): Observable<HeroDto> {
-        return this.http.get<HeroDto>(`/heroes/${herId}`);
+        return this.http.get<HeroDto>(`/hero/${herId}`);
     }
 
     /**
-     * Renvoie la liste des héros filtrés avec le terme le cas échéant
+     * @description Renvoie la liste des héros filtrés avec le terme le cas échéant
      * @param term Terme de la recherche
-     * @param options Options pour 'fetch'.
      * @returns Liste des héros
      */
-    searchHeroes(term?: string, queryParams: any = {}): Observable<HeroDto[]> {
+    getHeroes(term?: string, queryParams: any = {}): Observable<HeroDto[]> {
         if(term) {
             queryParams['term'] = term
         }
@@ -59,17 +55,16 @@ export class HeroesService {
         const httpParams = new HttpParams({fromObject : queryParams});
         const httpOptions = { params: httpParams }
 
-        return this.http.get<HeroDto[]>(`/heroes`, httpOptions);
+        return this.http.get<HeroDto[]>(`/hero`, httpOptions);
     }
 
     /**
-     * Modification d'un héro
+     * @description Modification d'un héro
      * @param herId Id technique du héro
      * @param heroUpdate Informations à modifier
-     * @param options Options pour 'fetch'.
      * @returns Liste des héros
      */
     updateHero(herId: number, heroUpdate: HeroUpdateDto): Observable<HeroDto> {
-        return this.http.patch<HeroDto>(`/heroes/${herId}`, heroUpdate);
+        return this.http.patch<HeroDto>(`/hero/${herId}`, heroUpdate);
     }
 }

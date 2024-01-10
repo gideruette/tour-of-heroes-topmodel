@@ -9,26 +9,6 @@ services:
       - POSTGRES_DB=toh
     volumes:
       - ./db/init:/docker-entrypoint-initdb.d
-  modgen:
-    image: modgen
-    build:
-      context: ./toh-model
-      dockerfile: Dockerfile
-    working_dir: /toh/toh-model
-    volumes:
-      - ./:/toh
-  build-back:
-    image: docker-maven
-    build:
-      dockerfile: dockerfile
-    volumes:
-      - "./toh-back:/toh"
-      - ~/.m2:/root/.m2
-    working_dir: /toh
-    entrypoint: ["mvn", "spring-boot:build-image" ]
-    privileged: true
-    environment:
-      - DOCKER_HOST=tcp://host.docker.internal:2375
   back:
     image: tour-of-heroes:0.0.1-SNAPSHOT
     ports:
@@ -37,17 +17,3 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/toh?currentSchema=toh
       - SPRING_DATASOURCE_USERNAME=toh
       - SPRING_DATASOURCE_PASSWORD=toh
-  build-front:
-    image: node
-    volumes:
-      - "./toh-front:/toh-front"
-    working_dir: "/toh-front"
-    entrypoint: "npm install --force"
-  front:
-    image: node
-    volumes:
-      - "./toh-front:/toh-front"
-    ports:
-      - 4200:4200
-    working_dir: "/toh-front"
-    entrypoint: "npm run start"

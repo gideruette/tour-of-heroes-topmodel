@@ -22,9 +22,9 @@ import topmodel.toh.dtos.heroes.HeroCreationDto;
 import topmodel.toh.dtos.heroes.HeroDto;
 import topmodel.toh.dtos.heroes.HeroUpdateDto;
 
-@RequestMapping("heroes")
+@RequestMapping("hero")
 @Generated("TopModel : https://github.com/klee-contrib/topmodel")
-public interface HeroesController {
+public interface HeroController {
 
 
 	/**
@@ -33,7 +33,7 @@ public interface HeroesController {
 	 * @return Liste des héros
 	 */
 	@PostMapping(path = "")
-	HeroDto createHero(@RequestBody @Valid HeroCreationDto heroUpdate);
+	HeroDto addHero(@RequestBody @Valid HeroCreationDto heroUpdate);
 
 	/**
 	 * Suppression d'un héro.
@@ -56,7 +56,7 @@ public interface HeroesController {
 	 * @return Liste des héros
 	 */
 	@GetMapping(path = "")
-	List<HeroDto> searchHeroes(@RequestParam(value = "term", required = false) String term);
+	List<HeroDto> getHeroes(@RequestParam(value = "term", required = false) String term);
 
 	/**
 	 * Modification d'un héro.
