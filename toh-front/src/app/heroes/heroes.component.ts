@@ -1,12 +1,16 @@
 import { HeroCreationDto } from '@/appgenerated/model/heroes/hero-creation-dto';
+import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { HeroService } from 'src/appgenerated/api/heroes/hero';
 import { HeroDto } from 'src/appgenerated/model/heroes/hero-dto';
 
 @Component({
-  selector: 'app-heroes',
-  templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.css'],
+    selector: 'app-heroes',
+    templateUrl: './heroes.component.html',
+    styleUrls: ['./heroes.component.css'],
+    standalone: true,
+    imports: [NgFor, RouterLink],
 })
 export class HeroesComponent implements OnInit {
   heroes: HeroDto[] = [];
@@ -32,7 +36,6 @@ export class HeroesComponent implements OnInit {
   }
 
   delete(hero: HeroDto): void {
-    this.heroes = this.heroes.filter((h) => h !== hero);
     this.heroService.deleteHero(hero.id!).subscribe(() => this.getHeroes());
   }
 }

@@ -1,26 +1,22 @@
-import { Location } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { Location, NgIf, UpperCasePipe } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 
-import { HeroService } from "src/appgenerated/api/heroes/hero";
-import { HeroDto } from "src/appgenerated/model/heroes/hero-dto";
+import { FormsModule } from '@angular/forms';
+import { HeroService } from 'src/appgenerated/api/heroes/hero';
+import { HeroDto } from 'src/appgenerated/model/heroes/hero-dto';
 
 @Component({
   selector: 'app-hero-detail',
   templateUrl: './hero-detail.component.html',
-  styleUrls: [ './hero-detail.component.css' ]
+  styleUrls: ['./hero-detail.component.css'],
+  standalone: true,
+  imports: [NgIf, FormsModule, UpperCasePipe],
 })
 export class HeroDetailComponent implements OnInit {
   hero: HeroDto | undefined;
-  id: number;
+  @Input() id!: number;
 
-  constructor(
-    private route: ActivatedRoute,
-    private heroService: HeroService,
-    private location: Location
-    ) {
-      this.id = parseInt(this.route.snapshot.paramMap.get("id")!, 10);
-    }
+  constructor(private heroService: HeroService, private location: Location) {}
 
   ngOnInit(): void {
     this.getHero();
@@ -37,8 +33,8 @@ export class HeroDetailComponent implements OnInit {
   save(): void {
     if (this.hero) {
       this.heroService
-      .updateHero(this.hero.id!, { name: this.hero.name })
-      .subscribe(() => this.goBack());
+        .updateHero(this.hero.id!, { name: this.hero.name })
+        .subscribe(() => this.goBack());
     }
   }
 }
