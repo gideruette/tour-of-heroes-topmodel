@@ -1,5 +1,14 @@
 import { Location, NgIf, UpperCasePipe } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  InputSignal,
+  OnInit,
+  Signal,
+  WritableSignal,
+  computed,
+  input,
+  signal,
+} from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { HeroService } from 'src/appgenerated/api/heroes/hero';
@@ -13,17 +22,26 @@ import { HeroDto } from 'src/appgenerated/model/heroes/hero-dto';
   imports: [NgIf, FormsModule, UpperCasePipe],
 })
 export class HeroDetailComponent implements OnInit {
-  hero: HeroDto | undefined;
-  @Input() id!: number;
-
-  constructor(private heroService: HeroService, private location: Location) {}
+  hero: WritableSignal<HeroDto | undefined>;
+  heroName: Signal<string | undefined>;
+  id: InputSignal<number>;
+  constructor(
+    private readonly heroService: HeroService,
+    private readonly location: Location
+  ) {
+    this.id = input.required<number>();
+    this.hero = signal(undefined);
+    this.heroName = computed(() => this.hero()?.name);
+  }
 
   ngOnInit(): void {
     this.getHero();
   }
 
   getHero(): void {
-    this.heroService.getHero(this.id).subscribe((hero) => (this.hero = hero));
+    this.heroService
+      .getHero(this.id())
+      .subscribe((hero) => this.hero.set(hero));
   }
 
   goBack(): void {
@@ -31,10 +49,15 @@ export class HeroDetailComponent implements OnInit {
   }
 
   save(): void {
-    if (this.hero) {
+    const hero = this.hero();
+    if (hero) {
       this.heroService
-        .updateHero(this.hero.id!, { name: this.hero.name })
+        .updateHero(this.id(), { name: hero.name })
         .subscribe(() => this.goBack());
     }
+  }
+
+  nameChanged(name: any) {
+    this.hero.set({ ...this.hero(), name });
   }
 }
