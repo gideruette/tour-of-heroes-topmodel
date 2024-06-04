@@ -24,12 +24,11 @@ import { HeroDto } from 'src/appgenerated/model/heroes/hero-dto';
 export class HeroDetailComponent implements OnInit {
   hero: WritableSignal<HeroDto | undefined>;
   heroName: Signal<string | undefined>;
-  id: InputSignal<number>;
+  id: InputSignal<number> = input.required<number>();
   constructor(
     private readonly heroService: HeroService,
     private readonly location: Location
   ) {
-    this.id = input.required<number>();
     this.hero = signal(undefined);
     this.heroName = computed(() => this.hero()?.name);
   }
