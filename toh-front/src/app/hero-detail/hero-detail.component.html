@@ -3,7 +3,12 @@
 <div><span>id: </span>{{ id() }}</div>
 <div>
   <label for="hero-name">Hero name: </label>
-  <input id="hero-name" placeholder="Hero name" (ngModelChange)="nameChanged($event)" [ngModel]="heroName()"/>
+  <input
+    id="hero-name"
+    placeholder="Hero name"
+    (ngModelChange)="nameChanged($event)"
+    [ngModel]="heroName()"
+  />
 </div>
 <button type="button" (click)="goBack()">go back</button>
 <button type="button" (click)="save()">save</button>

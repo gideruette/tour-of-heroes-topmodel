@@ -1,25 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
-import {
-  debounceTime, distinctUntilChanged, switchMap
-} from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 import { HeroService } from '@/appgenerated/api/heroes/hero';
 import { HeroDto } from '@/appgenerated/model/heroes/hero-dto';
+import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-hero-search',
-    templateUrl: './hero-search.component.html',
-    styleUrls: ['./hero-search.component.css'],
-    standalone: true,
-    imports: [NgFor, RouterLink, AsyncPipe]
+  selector: 'app-hero-search',
+  templateUrl: './hero-search.component.html',
+  styleUrls: ['./hero-search.component.css'],
+  standalone: true,
+  imports: [RouterLink, AsyncPipe],
 })
 export class HeroSearchComponent implements OnInit {
-  heroes!: Observable<HeroDto[]>;
+  heroes!: HeroDto[];
   private searchTerms = new Subject<string>();
 
   constructor(private heroService: HeroService) {}
@@ -30,15 +28,17 @@ export class HeroSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.heroes = this.searchTerms.pipe(
-      // wait 300ms after each keystroke before considering the term
-      debounceTime(300),
+    this.searchTerms
+      .pipe(
+        // wait 300ms after each keystroke before considering the term
+        debounceTime(300),
 
-      // ignore new term if same as previous term
-      distinctUntilChanged(),
+        // ignore new term if same as previous term
+        distinctUntilChanged(),
 
-      // switch to new search observable each time the term changes
-      switchMap((term: string) => this.heroService.getHeroes(term)),
-    );
+        // switch to new search observable each time the term changes
+        switchMap((term: string) => this.heroService.getHeroes(term))
+      )
+      .subscribe((heroes) => (this.heroes = heroes));
   }
 }

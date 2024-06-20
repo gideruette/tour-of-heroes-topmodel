@@ -1,12 +1,16 @@
 <div id="search-component">
   <label for="search-box">Hero Search</label>
   <input #searchBox id="search-box" (input)="search(searchBox.value)" />
-
+  <span i18n>
+    {heroes?.length, plural, =0 {Aucun résultat} =1 {Un seul résultat} other {{{ heroes?.length }} résultats}}
+  </span>
   <ul class="search-result">
-    <li *ngFor="let hero of heroes | async" >
-      <a routerLink="/detail/{{hero.id}}">
-        {{hero.name}}
-      </a>
-    </li>
+    @for (hero of heroes; track hero) {
+      <li>
+        <a routerLink="/detail/{{ hero.id }}">
+          {{ hero.name }}
+        </a>
+      </li>
+    }
   </ul>
 </div>

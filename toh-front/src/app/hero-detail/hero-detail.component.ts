@@ -1,4 +1,4 @@
-import { Location, NgIf, UpperCasePipe } from '@angular/common';
+import { Location, UpperCasePipe } from '@angular/common';
 import {
   Component,
   InputSignal,
@@ -7,7 +7,7 @@ import {
   WritableSignal,
   computed,
   input,
-  signal,
+  signal
 } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
@@ -19,7 +19,7 @@ import { HeroDto } from 'src/appgenerated/model/heroes/hero-dto';
   templateUrl: './hero-detail.component.html',
   styleUrls: ['./hero-detail.component.css'],
   standalone: true,
-  imports: [NgIf, FormsModule, UpperCasePipe],
+  imports: [FormsModule, UpperCasePipe],
 })
 export class HeroDetailComponent implements OnInit {
   hero: WritableSignal<HeroDto | undefined>;

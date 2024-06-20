@@ -1,0 +1,9 @@
+{
+  "locale": "fr-FR",
+  "translations": {
+    "9169252125508909250": "Tour of Heroes",
+    "6570363013146073520": "Dashboard",
+    "8856905278208146821": " {$ICU} ",
+    "4070815125212238562": "{VAR_PLURAL, plural, =0 {No result} =1 {Only one result} other {{INTERPOLATION} results}}"
+  }
+}
